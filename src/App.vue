@@ -75,18 +75,8 @@ export default {
   }
 
   .el-header {
-    color: #333;
-    line-height: 60px;
-    height: 60px;
-    z-index: 2;
+    padding: 0 !important;
     width: 100%;
-    background: rgb(237, 244, 253);
-    border-bottom: 1px solid rgb(225, 236, 243);
-  }
-
-  .head {
-    float: left;
-    font-size: 20px;
   }
 
   .submit-button {
@@ -107,5 +97,11 @@ export default {
 
   .el-menu {
     height: 100%;
+  }
+  
+  .el-pagination {
+    margin-top: 20px;
+    text-align: right;
+    padding-top: 2rem;
   }
 </style>
