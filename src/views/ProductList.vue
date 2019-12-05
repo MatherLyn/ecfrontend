@@ -15,7 +15,7 @@
       </el-header>
       <el-container style="height: calc(100vh - 60px); margin-top: 60px; padding-top: 2px;">
         <el-aside width="200px" style="background: transparent">
-          <el-menu router>
+          <el-menu router :default-active="$route.path" active-text-color="#409EFF">
             <el-menu-item index="/analysis">
               <template slot="title"><i class="el-icon-s-platform"></i>分析报表</template>
             </el-menu-item>
@@ -25,7 +25,7 @@
             <el-menu-item index="/orderlist">
               <template slot="title"><i class="el-icon-s-order"></i>订单日志</template>
             </el-menu-item>
-            <el-menu-item index="/settings" style="position: absolute; bottom: 0; width: 100%;">
+            <el-menu-item index="/settings" style="position: absolute; bottom: 0; width: 100%; z-index: 2; background: #fff;">
               <template slot="title"><i class="el-icon-s-tools"></i>个人设置</template>
             </el-menu-item>
           </el-menu>

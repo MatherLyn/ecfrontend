@@ -15,7 +15,7 @@
       </el-header>
       <el-container style="height: calc(100vh - 60px); margin-top: 60px; padding-top: 2px;">
         <el-aside width="200px" style="background: transparent">
-          <el-menu router>
+          <el-menu router :default-active="$route.path" active-text-color="#409EFF">
             <el-menu-item index="/analysis">
               <template slot="title"><i class="el-icon-s-platform"></i>分析报表</template>
             </el-menu-item>
