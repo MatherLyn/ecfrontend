@@ -4,8 +4,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './plugins/element.js'
+import '../theme/index.css'
 
 Vue.config.productionTip = false
+
+axios.defaults.baseURL='http://127.0.0.1:8081'
 
 new Vue({
   router,
