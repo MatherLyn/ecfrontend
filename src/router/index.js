@@ -8,6 +8,7 @@ import Analysis from '../views/Analysis'
 import Login from '../views/Login'
 import Register from '../views/Register'
 import ModifyPwd from '../views/ModifyPwd'
+import Home from '../views/Home'
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    redirect: 'login'
+    component: Home
   },
   {
     path: '/login',

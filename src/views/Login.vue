@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <Header :type="false"/>
     <main class="register">
       <div class="form">
         <div class="form-item">
@@ -26,7 +26,7 @@
         </div>
       </div>
     </main>
-    <Footer />
+    <Footer :type="true"/>
     <Tips :content="'登录成功'" v-if="successful"/>
   </div>
 </template>

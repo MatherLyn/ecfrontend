@@ -30,7 +30,7 @@ export default {
     margin-bottom: 10px;
     font-size: 14px;
     line-height: 14px;
-    color: white;
+    color: #fff;
   }
 
   input {
@@ -41,6 +41,11 @@ export default {
     font-size: 16px;
     padding: 4px;
     box-sizing: border-box;
+  }
+
+  a {
+    color: #333;
+    text-decoration: none;
   }
 
   .form {
