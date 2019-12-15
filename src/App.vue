@@ -63,7 +63,7 @@ export default {
 
   .form-item:last-of-type {
     margin-bottom: 0;
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   #app {

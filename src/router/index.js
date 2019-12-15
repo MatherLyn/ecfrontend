@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 import Settings from '../views/Settings'
 import ProductList from '../views/ProductList'
 import OrderList from '../views/OrderList'
@@ -14,7 +15,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    redirect: 'register'
+    redirect: 'login'
   },
   {
     path: '/login',
@@ -34,27 +35,56 @@ const routes = [
   {
     path: '/analysis',
     name: 'analysis',
+    meta: {
+      requireAuth: true
+    },
     component: Analysis
   },
   {
     path: '/orderlist',
     name: 'orderlist',
+    meta: {
+      requireAuth: true
+    },
     component: OrderList
   },
   {
     path: '/productlist',
     name: 'productlist',
+    meta: {
+      requireAuth: true
+    },
     component: ProductList
   },
   {
     path: '/settings',
     name: 'settings',
+    meta: {
+      requireAuth: true
+    },
     component: Settings,
   }
 ]
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  console.log(store.state.offline)
+  console.log(to.meta.requireAuth)
+  if (to.meta.requireAuth) {  // 判断该路由是否需要登录权限
+    if (!store.state.offline) {  // 通过vuex state获取当前的token是否存在
+      next();
+    } else {
+      next({
+        path: '/login',
+        query: {redirect: to.path}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      })
+    }
+  } else {
+    next();
+  }
 })
 
 export default router
