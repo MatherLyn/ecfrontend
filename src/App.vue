@@ -22,6 +22,8 @@ export default {
   body {
     margin: 0;
     max-width: 1920px;
+    min-width: 900px;
+    background-color: rgb(245, 247, 250);
   }
 
   label {
@@ -108,5 +110,21 @@ export default {
     margin-top: 20px;
     text-align: right;
     padding-top: 2rem;
+  }
+
+  .el-tabs__nav-scroll {
+    padding-left: 20px;
+    
+  }
+
+  .el-tabs__nav-wrap::after {
+    
+  }
+
+  .el-tabs__item {
+    color: rgb(64, 158, 255) !important;
+    letter-spacing: 1px !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
   }
 </style>

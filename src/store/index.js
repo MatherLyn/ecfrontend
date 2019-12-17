@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     offline: true,
-    token: ''
+    token: '',
+    username: ''
   },
   mutations: {
   },

@@ -9,6 +9,9 @@ import Login from '../views/Login'
 import Register from '../views/Register'
 import ModifyPwd from '../views/ModifyPwd'
 import Home from '../views/Home'
+import Info from '../views/Info'
+import Cart from '../views/Cart'
+import Pay from '../views/Pay'
 
 Vue.use(VueRouter)
 
@@ -63,7 +66,28 @@ const routes = [
     meta: {
       requireAuth: true
     },
-    component: Settings,
+    component: Settings
+  },
+  {
+    path: '/info',
+    name: 'info',
+    component: Info
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    meta: {
+      requireAuth: true
+    },
+    component: Cart
+  },
+  {
+    path: '/pay',
+    name: 'pay',
+    meta: {
+      requireAuth: true
+    },
+    component: Pay
   }
 ]
 

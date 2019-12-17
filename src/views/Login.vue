@@ -54,10 +54,25 @@
           if (responseData.code) {
             this.$store.state.token = responseData.token
             this.$store.state.offline = false
+            this.$store.state.username = this.user.name
             this.successful = true
-            setTimeout(() => {
-              this.$router.push({ path: '/analysis' })
-            }, 2000);
+            const redirect = this.$route.query.redirect
+            console.log(redirect)
+            if (redirect) {
+              setTimeout(() => {
+                this.$router.push({ path: redirect })
+              }, 2000);
+              return
+            }
+            if (this.user.name === 'admin') {
+              setTimeout(() => {
+                this.$router.push({ path: '/analysis' })
+              }, 2000);
+            } else {
+              setTimeout(() => {
+                this.$router.push({ path: '/' })
+              }, 2000);
+            }
           } else {
             this.msg = responseData.msg
           }

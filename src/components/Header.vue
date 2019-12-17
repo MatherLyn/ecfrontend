@@ -5,7 +5,7 @@
     </div>
     <div class="login" v-if="type">
       <router-link to="/login" v-if="offline">登录</router-link>
-      <span class="quit" v-else>注销</span>
+      <span class="quit" v-else><span class="hello">你好，{{name}}</span><span class="logout" @click="doLogount">注销</span></span>
     </div>
      <!-- v-if="type" -->
   </div>
@@ -18,11 +18,20 @@
     ],
     data () {
       return {
-        offline: this.$store.state.offline
+        offline: this.$store.state.offline,
+        name: this.$store.state.username
       }
     },
     methods: {
-
+      doLogount () {
+        if (confirm('确定要注销吗')) {
+          alert('注销成功')
+          this.$store.state.offline = true
+          this.offline = true
+          return
+        }
+        alert('保持登录状态')
+      }
     }
   }
 </script>
@@ -55,9 +64,18 @@
 
   .quit {
     color: #fff;
+    font-size: 14px;
   }
 
-  .quit:hover {
+  .hello {
+    margin-right: 40px;
+  }
+
+  .logout {
+    font-size: 12px;
+  }
+
+  .logout:hover {
     cursor: pointer;
   }
 </style>
