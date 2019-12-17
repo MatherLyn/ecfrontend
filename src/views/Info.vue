@@ -17,14 +17,14 @@
             <div class="item-clause"><span>价格：</span>￥{{item.price}}</div>
             <div class="item-clause"><span>库存：</span>剩余 {{item.stock}} 件</div>
             <div class="item-clause"><span>数量：</span>
-              <el-input v-model="number" @change="handleChange" style="width: 80px; margin-right: 20px;" class="number-input"></el-input>
+              <el-input v-model="number" @input="handleChange" style="width: 80px; margin-right: 20px;" class="number-input"></el-input>
               <el-button type="primary" icon="el-icon-plus" style="padding: 9px 16px;" @click="handleNumberPlus"></el-button>
               <el-button icon="el-icon-minus" style="padding: 9px 16px;" @click="handleNumberMinus"></el-button>
             </div>
             <div class="item-clause"><span>总价：</span>￥{{totalPrice}}</div>
             <div class="button-container">
               <button class="buy" @click="$router.push({ path: '/pay' })">立即购买</button>
-              <button class="cart" @click="$router.push({ path: '/cart' })">加入购物车</button>
+              <button class="cart" @click="addToCart">加入购物车</button>
             </div>
           </div>
         </div>
@@ -40,20 +40,28 @@
       return {
         msg: '',
         item: {},
-        number: 1
+        number: 1,
+        order: {}
       }
     },
     methods: {
       handleChange () {
-        if (typeof this.number !== 'number') {
+        if (/\D/.test(this.number)) {
+          console.log(12123)
           this.number = 1
           return
+        }
+        if (this.number >= this.item.stock) {
+          this.number = this.item.stock
         }
         if (this.number < 1) {
           this.number = 1
         }
       },
       handleNumberPlus () {
+        if (this.number >= this.item.stock) {
+          return
+        }
         this.number++
       }, 
       handleNumberMinus () {
@@ -61,6 +69,18 @@
           return
         }
         this.number--
+      },
+      addToCart () {
+        this.order.commodity = this.item.name
+        this.order.price = this.item.price
+        this.order.quantity = this.number
+        this.order.totalPrice = this.totalPrice
+        this.order.Customer = this.$store.state.username
+        this.axios.post('/api/placeOrder', this.order, { headers: { 'Authorization': `Bearer ${this.$store.state.token}` } })
+        .then(response => {
+          console.log(response)
+          this.$router.push({ path: '/cart' })
+        })
       }
     },
     created () {

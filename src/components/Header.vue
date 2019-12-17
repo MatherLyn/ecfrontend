@@ -27,7 +27,9 @@
         if (confirm('确定要注销吗')) {
           alert('注销成功')
           this.$store.state.offline = true
+          this.$store.state.username = ''
           this.offline = true
+          this.$router.push({ path: '/' })
           return
         }
         alert('保持登录状态')
