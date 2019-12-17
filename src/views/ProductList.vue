@@ -28,6 +28,7 @@
               class="product-input">
             </el-input>
             <el-button type="primary" icon="el-icon-search" @click="doFilter">查找</el-button>
+            <el-button type="primary" icon="el-icon-thumb" @click="showPopupState">新增</el-button>
           </div>
           <el-table :data="showData">
             <el-table-column prop="id" label="编号" fixed="left"></el-table-column>
@@ -55,12 +56,14 @@
         </el-main>
       </el-container>
     </el-container>
+    <ListPopup v-show="showPopup" @popupClose="closePopup" :type="1" @updateList="updateTable"/>
   </div>
 </template>
 
 <script>
   import Header from '../components/Header'
   import Menu from '../components/Menu'
+  import ListPopup from '../components/ListPopup'
   export default {
     data () {
       return {
@@ -104,13 +107,11 @@
           this.filtering = false
           return
         }
-        console.log(this.search)
-        console.log(this.check)
-        console.log(this.tableData)
         this.showData = this.tableData.filter(item => {
           return item[this.check].toString().toLowerCase().includes(this.search.toString().toLowerCase())
         })
         this.filtering = true
+        this.curPage = 1
       },
       filterType (value, row, column) {
         const property = column['property']
@@ -159,6 +160,13 @@
       },
       closePopup () {
         this.showPopup = false
+      },
+      updateTable () {
+        this.axios.get('/api/productList')
+        .then(response => {
+          this.tableData = response.data.data
+          this.showData = response.data.data
+        })
       }
     },
     computed: {
@@ -176,7 +184,8 @@
     },
     components: {
       Header,
-      Menu
+      Menu,
+      ListPopup
     }
   }
 </script>

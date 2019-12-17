@@ -31,9 +31,10 @@
           </div>
           <el-table :data="showData">
             <el-table-column prop="id" label="编号" fixed="left"></el-table-column>
-            <el-table-column prop="name" label="名称"></el-table-column>
+            <el-table-column prop="commodity" label="名称"></el-table-column>
+            <el-table-column prop="quantity" label="数量"></el-table-column>
             <el-table-column prop="price" label="价格"></el-table-column>
-            <el-table-column prop="stock" label="库存"></el-table-column>
+            <el-table-column prop="Customer" label="购买者"></el-table-column>
             <el-table-column
               fixed="right"
               prop="manipulation"
@@ -70,7 +71,6 @@
         search: '',
         tableData: [],
         showData: [],
-        popup: false,
         showId: '',
         showType: '',
         showModel: '',
@@ -78,8 +78,7 @@
         showMsg: '',
         curSize: 10,
         curPage: 1,
-        filtering: false,
-        showPopup: false
+        filtering: false
       }
     },
     methods: {
@@ -108,6 +107,7 @@
           return item[this.check].toString().toLowerCase().includes(this.search.toString().toLowerCase())
         })
         this.filtering = true
+        this.curPage = 1
       },
       filterType (value, row, column) {
         const property = column['property']
@@ -150,12 +150,6 @@
         this.curPage = val
         const start = (val - 1) * this.curSize
         this.showData = this.tableData.slice(start, start + this.curSize)
-      },
-      showPopupState () {
-        this.showPopup = true
-      },
-      closePopup () {
-        this.showPopup = false
       }
     },
     computed: {
@@ -165,7 +159,7 @@
       }
     },
     created() {
-      this.axios.get('/api/productList')
+      this.axios.get('/api/orderList')
       .then(response => {
         this.tableData = response.data.data
         this.showData = response.data.data
